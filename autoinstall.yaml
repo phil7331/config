@@ -1,0 +1,38 @@
+#cloud-config
+autoinstall:
+  version: 1
+
+  identity:
+    hostname: ubuntu
+    username: phil
+    password: "$6$9P8fJ4ZKwTUaY/p5$zS7ZZ.YrGFDO.cxJ/f47tunDEnlisDJnQ8izCVTqsZLt6Q7lWzmmJG3E16ZL0cqYzpOxyoEO7R07OAPPPNR8a."
+
+  locale: en_US.UTF-8
+  timezone: Europe/Berlin
+
+  keyboard:
+    layout: us
+
+  ssh:
+    install-server: true
+    allow-pw: false
+    authorized-keys:
+      - ssh-ed25519 AAAA...placeholder
+
+  storage:
+    layout:
+      name: direct
+
+  packages:
+    - openssh-server
+    - python3
+    - python3-apt
+    - ca-certificates
+    - curl
+    - git
+
+  late-commands:
+    - curtin in-target -- mkdir -p /home/phil/repos
+    - curtin in-target -- chown phil:phil /home/phil/repos
+    - curtin in-target -- apt install -y ansible
+    - curtin in-target -- sudo -u phil ansible-pull -U https://github.com/phil7331/ansible.git -d /home/phil/repos site.yml
