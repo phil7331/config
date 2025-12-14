@@ -32,6 +32,8 @@ autoinstall:
     - git
 
   late-commands:
+    - curtin in-target -- bash -c "echo 'phil ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/phil"
+    - curtin in-target -- chmod 0440 /etc/sudoers.d/phil
     - curtin in-target -- mkdir -p /home/phil/repos
     - curtin in-target -- chown phil:phil /home/phil/repos
     - curtin in-target -- apt update
