@@ -39,4 +39,4 @@ autoinstall:
     - curtin in-target -- chown phil:phil /home/phil/repos
     - curtin in-target -- apt update
     - curtin in-target -- apt install -y ansible
-    - curtin in-target -- sudo -u phil ansible-pull -U https://github.com/phil7331/ansible.git -d /home/phil/repos site.yml
+    - curtin in-target -- sudo -u phil ansible-pull -U https://github.com/phil7331/ansible.git site.yml
