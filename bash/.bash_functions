@@ -1,0 +1,3 @@
+wx11() {
+    loginctl show-session "$(awk '/tty/ {print $1}' <(loginctl))" -p Type | awk -F= '{print $2}'
+}
